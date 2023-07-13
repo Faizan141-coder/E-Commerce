@@ -35,7 +35,7 @@ export function ProductGrid({ products }: Props) {
             <Image
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64, ${toBase64(shimmer(225, 280))}`}
-              src='/images/placeholder.png'
+              src='https://images.unsplash.com/photo-1689072503598-638956beee7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8'
               // src={urlForImage(product.images[0]).url()}
               alt={product.name}
               width={225}

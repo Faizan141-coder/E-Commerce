@@ -9,12 +9,21 @@ import { ProductGrid } from "@/components/product-grid"
 import { ProductSort } from "@/components/product-sort"
 import { seedSanityData } from "@/lib/seed"
 
-interface Props {}
+interface Props {
+  searchParams: {
+    date?: string
+    price?: string
+  }
+}
 
-export default async function Page() {
+export default async function Page({ searchParams }: Props) {
+
+  const priceOrder = searchParams.price ? `| order(price ${searchParams.price})` : ''
+  const dateOrder = searchParams.date ? `| order(_createdAt ${searchParams.date})` : ''
+  const order = `${priceOrder}${dateOrder}`
 
   const products = await client.fetch<SanityProduct[]>(
-    groq`*[_type == "product"] {
+    groq`*[_type == "product"] ${order} {
       _id,
       _createdAt,
       name,
