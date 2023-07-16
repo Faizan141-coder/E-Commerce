@@ -8,13 +8,26 @@ import { Button } from "@/components/ui/button"
 
 export function CartSummary() {
 
-  const { formattedTotalPrice, totalPrice, cartDetails, cartCount } = useShoppingCart()
+  const { formattedTotalPrice, totalPrice, cartDetails, cartCount, redirectToCheckout } = useShoppingCart()
   const [loading, setLoading] = useState(false)
   const isDisabled = loading || cartCount! === 0
   const shippingAmount = cartCount! > 0 ? 500 : 0
   const totalAmount = totalPrice! + shippingAmount
 
-  function onCheckout() {}
+  async function onCheckout() {
+    setLoading(true)
+    const response = await fetch('/api/checkout', {
+      method: 'POST',
+      body: JSON.stringify(cartDetails)
+    })
+
+    const data = await response.json()
+    const result = await redirectToCheckout(data.id)
+    if (result.error) {
+      console.error(result.error)
+    }
+    setLoading(false)
+  }
 
   return (
     <section
