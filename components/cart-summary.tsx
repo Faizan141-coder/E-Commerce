@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 export function CartSummary() {
 
   const { formattedTotalPrice, totalPrice, cartDetails, cartCount } = useShoppingCart()
+  const [loading, setLoading] = useState(false)
+  const isDisabled = loading || cartCount! === 0
   const shippingAmount = cartCount! > 0 ? 500 : 0
   const totalAmount = totalPrice! + shippingAmount
 
@@ -41,9 +43,9 @@ export function CartSummary() {
       </dl>
 
       <div className="mt-6">
-        <Button className="w-full">
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Loading...
+        <Button onClick={onCheckout} className="w-full" disabled={isDisabled}>
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {loading ? "Loading..." : "Checkout"}
         </Button>
       </div>
     </section>
