@@ -37,10 +37,10 @@ export function ProductGallery({ product }: Props) {
                   blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(200, 200))}`}
                 />
               </span>
-              {/* <span
-                  className="pointer-events-none absolute inset-0 rounded-md ring-4 ring-indigo-500 ring-offset-2"
-                  aria-hidden="true" 
-                /> */}
+              {index === selectedImage && <span
+                className="pointer-events-none absolute inset-0 rounded-md ring-4 ring-indigo-500 ring-offset-2"
+                aria-hidden="true" 
+              />}
             </div>
           ))}
         </ul>
